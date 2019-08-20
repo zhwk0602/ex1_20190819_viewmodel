@@ -53,18 +53,18 @@
         </tr>
         <tr>
             @*<td><input type="text" name="Detail[0].OrderID" /></td>
-            <td><input type="text" name="Detail[0].CustomerID" /></td>
-            <td><input type="text" name="Detail[0].EmployeeID" /></td>
-            <td><input type="text" name="Detail[0].RequiredDate" /></td>
-            <td><input type="text" name="Detail[0].ShippedDate" /></td>
-            <td><input type="text" name="Detail[0].ShipVia" /></td>
-            <td><input type="text" name="Detail[0].Freight" /></td>
-            <td><input type="text" name="Detail[0].ShipName" /></td>
-            <td><input type="text" name="Detail[0].ShipAddress" /></td>
-            <td><input type="text" name="Detail[0].ShipCity" /></td>
-            <td><input type="text" name="Detail[0].ShipRegion" /></td>
-            <td><input type="text" name="Detail[0].ShipPostalCode" /></td>
-            <td><input type="text" name="Detail[0].ShipCountry" /></td>*@
+                <td><input type="text" name="Detail[0].CustomerID" /></td>
+                <td><input type="text" name="Detail[0].EmployeeID" /></td>
+                <td><input type="text" name="Detail[0].RequiredDate" /></td>
+                <td><input type="text" name="Detail[0].ShippedDate" /></td>
+                <td><input type="text" name="Detail[0].ShipVia" /></td>
+                <td><input type="text" name="Detail[0].Freight" /></td>
+                <td><input type="text" name="Detail[0].ShipName" /></td>
+                <td><input type="text" name="Detail[0].ShipAddress" /></td>
+                <td><input type="text" name="Detail[0].ShipCity" /></td>
+                <td><input type="text" name="Detail[0].ShipRegion" /></td>
+                <td><input type="text" name="Detail[0].ShipPostalCode" /></td>
+                <td><input type="text" name="Detail[0].ShipCountry" /></td>*@
             <td>@Html.TextBoxFor(x => x.OrderID)</td>
             <td>@Html.TextBoxFor(x => x.CustomerID)</td>
             <td>@Html.TextBoxFor(x => x.EmployeeID)</td>
@@ -83,14 +83,13 @@
         <tr>
             <td><input type="submit" value="編輯"></td>
             <td><input id="add" type="button" value="新增"></td>
-            
         </tr>
     </table>
 </div>
 <br>
 <div id=" a01">
     <table id="customers" class="adddetail">
-        
+
         <tr>
             <th>@Html.LabelFor(x => x.Detail.FirstOrDefault().ProductID)</th>
             <th>@Html.LabelFor(x => x.Detail.FirstOrDefault().UnitPrice)</th>
@@ -98,12 +97,12 @@
             <th>@Html.LabelFor(x => x.Detail.FirstOrDefault().Discount)</th>
         </tr>
         @*<tr>
-            <td><input type="text" name="Detail[0].ProductID" /></td>
-            <td><input type="text" name="Detail[0].UnitPrice" /></td>
-            <td><input type="text" name="Detail[0].Quantity" /></td>
-            <td><input type="text" name="Detail[0].Discount" /></td>
-        </tr>*@
-</table>
+                <td><input type="text" name="Detail[0].ProductID" /></td>
+                <td><input type="text" name="Detail[0].UnitPrice" /></td>
+                <td><input type="text" name="Detail[0].Quantity" /></td>
+                <td><input type="text" name="Detail[0].Discount" /></td>
+            </tr>*@
+    </table>
 </div>
 <br>
 @*<div>
@@ -128,28 +127,53 @@
 <script>
     var n = 0;
     $("#add").click(function () {
-         var inp = '<input type="text" name="Detail[' + n + '].ProductID" />'
-        var inu = '<input type="text" name="Detail[' + n + '].UnitPrice" />'
-        var inq = '<input type="text" name="Detail[' + n + '].Quantity" />'
-        var ind = '<input type="text" name="Detail[' + n + '].Discount" />'
-        var indelete='<input type="button" class="remove_field" value="刪除"/>'
-        
+        var inp = '<input class="productID" type="text" name="Detail[' + n + '].ProductID" />'
+        var inu = '<input class="unitPrice" type="text" name="Detail[' + n + '].UnitPrice" />'
+        var inq = '<input class="quantity" type="text" name="Detail[' + n + '].Quantity" />'
+        var ind = '<input class ="discount" type="text" name="Detail[' + n + '].Discount" />'
+        var indelete = '<input type="button" class="remove_field" value="刪除" onclick="deleterow(this)" />'
 
         var adddata1 =
-            "<tr><td>" + inp + "</td><td>" + inu + "</td><td>" + inq + "</td><td>" + ind + "</td><td>"+indelete+"</td></tr>";
+            "<tr><td>" + inp + "</td><td>" + inu + "</td><td>" + inq + "</td><td>" + ind + "</td><td>" + indelete + "</td></tr>";
         $(".adddetail").append(adddata1);
         n++;
-
+        rename();
     });
-  //  $("#customers").on("click", ".remove_field", function (e) { //user click on remove text
-  //      debugger;
-		//e.preventDefault(); $(this).parent('tr').remove(); n--;
-  //  })
-    $(".adddetail").delegate('.remove_field', 'click', function () {
+    //  $("#customers").on("click", ".remove_field", function (e) { //user click on remove text
+    //      debugger;
+    //e.preventDefault(); $(this).parent('tr').remove(); n--;
+    //  })
 
-        $(this).parent().parent("tr").remove();
-        n--;
-    });
- 
-    
+    function deleterow(el) {
+        $(el).parent().parent("tr").remove();
+        rename();
+
+    }
+
+    //$(".adddetail").delegate('.remove_field', 'click', function () {
+
+    //    $(this).parent().parent("tr").remove();
+    //    n--;
+    //    rename();
+    //});
+
+    function rename() {
+        $(".productID").each(function (index) {
+            $(this).attr("name", "Detail[" + index + "].ProductID")
+
+        });
+        $(".unitPrice").each(function (index) {
+            $(this).attr("name", "Detail[" + index + "].UnitPrice")
+
+        });
+        $(".quantity").each(function (index) {
+            $(this).attr("name", "Detail[" + index + "].Quantity")
+
+        });
+        $(".discount").each(function (index) {
+            $(this).attr("name", "Detail[" + index + "].Discount")
+
+        });
+
+    };
 </script>
