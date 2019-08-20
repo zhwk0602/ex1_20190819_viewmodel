@@ -1,0 +1,155 @@
+﻿@model ex1_20190819_viewmodel.Models.OrderViewModel
+<head>
+    <style>
+        #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+            #customers td, #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #customers tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #customers tr:hover {
+                background-color: #ddd;
+            }
+
+            #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #4CAF50;
+                color: white;
+            }
+    </style>
+</head>
+@using (Html.BeginForm("Create", "Create", FormMethod.Post))
+{@Html.AntiForgeryToken()
+<div>
+
+    <table id="customers">
+
+        <tr>
+            <th>@Html.LabelFor(x => x.OrderID)</th>
+            <th>@Html.LabelFor(x => x.CustomerID)</th>
+            <th>@Html.LabelFor(x => x.EmployeeID)</th>
+            <th>@Html.LabelFor(x => x.OrderDate)</th>
+            <th>@Html.LabelFor(x => x.RequiredDate)</th>
+            <th>@Html.LabelFor(x => x.ShippedDate)</th>
+            <th>@Html.LabelFor(x => x.ShipVia)</th>
+            <th>@Html.LabelFor(x => x.Freight)</th>
+            <th>@Html.LabelFor(x => x.ShipName)</th>
+            <th>@Html.LabelFor(x => x.ShipAddress)</th>
+            <th>@Html.LabelFor(x => x.ShipCity)</th>
+            <th>@Html.LabelFor(x => x.ShipRegion)</th>
+            <th>@Html.LabelFor(x => x.ShipPostalCode)</th>
+            <th>@Html.LabelFor(x => x.ShipCountry)</th>
+        </tr>
+        <tr>
+            @*<td><input type="text" name="Detail[0].OrderID" /></td>
+            <td><input type="text" name="Detail[0].CustomerID" /></td>
+            <td><input type="text" name="Detail[0].EmployeeID" /></td>
+            <td><input type="text" name="Detail[0].RequiredDate" /></td>
+            <td><input type="text" name="Detail[0].ShippedDate" /></td>
+            <td><input type="text" name="Detail[0].ShipVia" /></td>
+            <td><input type="text" name="Detail[0].Freight" /></td>
+            <td><input type="text" name="Detail[0].ShipName" /></td>
+            <td><input type="text" name="Detail[0].ShipAddress" /></td>
+            <td><input type="text" name="Detail[0].ShipCity" /></td>
+            <td><input type="text" name="Detail[0].ShipRegion" /></td>
+            <td><input type="text" name="Detail[0].ShipPostalCode" /></td>
+            <td><input type="text" name="Detail[0].ShipCountry" /></td>*@
+            <td>@Html.TextBoxFor(x => x.OrderID)</td>
+            <td>@Html.TextBoxFor(x => x.CustomerID)</td>
+            <td>@Html.TextBoxFor(x => x.EmployeeID)</td>
+            <td>@Html.TextBoxFor(x => x.OrderDate)</td>
+            <td>@Html.TextBoxFor(x => x.RequiredDate)</td>
+            <td>@Html.TextBoxFor(x => x.ShippedDate)</td>
+            <td>@Html.TextBoxFor(x => x.ShipVia)</td>
+            <td>@Html.TextBoxFor(x => x.Freight)</td>
+            <td>@Html.TextBoxFor(x => x.ShipName)</td>
+            <td>@Html.TextBoxFor(x => x.ShipAddress)</td>
+            <td>@Html.TextBoxFor(x => x.ShipCity)</td>
+            <td>@Html.TextBoxFor(x => x.ShipRegion)</td>
+            <td>@Html.TextBoxFor(x => x.ShipPostalCode)</td>
+            <td>@Html.TextBoxFor(x => x.ShipCountry)</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="編輯"></td>
+            <td><input id="add" type="button" value="新增"></td>
+            
+        </tr>
+    </table>
+</div>
+<br>
+<div id=" a01">
+    <table id="customers" class="adddetail">
+        
+        <tr>
+            <th>@Html.LabelFor(x => x.Detail.FirstOrDefault().ProductID)</th>
+            <th>@Html.LabelFor(x => x.Detail.FirstOrDefault().UnitPrice)</th>
+            <th>@Html.LabelFor(x => x.Detail.FirstOrDefault().Quantity)</th>
+            <th>@Html.LabelFor(x => x.Detail.FirstOrDefault().Discount)</th>
+        </tr>
+        @*<tr>
+            <td><input type="text" name="Detail[0].ProductID" /></td>
+            <td><input type="text" name="Detail[0].UnitPrice" /></td>
+            <td><input type="text" name="Detail[0].Quantity" /></td>
+            <td><input type="text" name="Detail[0].Discount" /></td>
+        </tr>*@
+</table>
+</div>
+<br>
+@*<div>
+        <table id="customers">
+
+            <tr>
+
+                <th>@Html.LabelFor(x => x.Detail.FirstOrDefault().ProductID)</th>
+                <th>@Html.LabelFor(x => x.Detail.FirstOrDefault().UnitPrice)</th>
+                <th>@Html.LabelFor(x => x.Detail.FirstOrDefault().Quantity)</th>
+                <th>@Html.LabelFor(x => x.Detail.FirstOrDefault().Discount)</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="Detail[1].ProductID" /></td>
+                <td><input type="text" name="Detail[1].UnitPrice" /></td>
+                <td><input type="text" name="Detail[1].Quantity" /></td>
+                <td><input type="text" name="Detail[1].Discount" /></td>
+            </tr>
+        </table>
+    </div>*@
+}
+<script>
+    var n = 0;
+    $("#add").click(function () {
+         var inp = '<input type="text" name="Detail[' + n + '].ProductID" />'
+        var inu = '<input type="text" name="Detail[' + n + '].UnitPrice" />'
+        var inq = '<input type="text" name="Detail[' + n + '].Quantity" />'
+        var ind = '<input type="text" name="Detail[' + n + '].Discount" />'
+        var indelete='<input type="button" class="remove_field" value="刪除"/>'
+        
+
+        var adddata1 =
+            "<tr><td>" + inp + "</td><td>" + inu + "</td><td>" + inq + "</td><td>" + ind + "</td><td>"+indelete+"</td></tr>";
+        $(".adddetail").append(adddata1);
+        n++;
+
+    });
+  //  $("#customers").on("click", ".remove_field", function (e) { //user click on remove text
+  //      debugger;
+		//e.preventDefault(); $(this).parent('tr').remove(); n--;
+  //  })
+    $(".adddetail").delegate('.remove_field', 'click', function () {
+
+        $(this).parent().parent("tr").remove();
+        n--;
+    });
+ 
+    
+</script>
